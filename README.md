@@ -36,6 +36,39 @@ ENTRYPOINT [ "dotnet", "******.dll" ]
 docker build -t ***** .
 10. Bấm lệnh :
 docker run -it -d -rm -p PortTuyChinh(3000):80 -name TenContainer *****
+11. Tạo một project Api
+12. Tải thư viện ocelot gateway (bản 15 cho .Net5)
+13. tạo một json file Ocelot.json
+14. 
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/Service1",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 3000
+        }
+      ],
+      "UpstreamPathTemplate": "/apigateway/Service1",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/Service2",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4000
+        }
+      ],
+      "UpstreamPathTemplate": "/apigateway/Service2",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST" ]
+    }
+  ]
+}
+
 
 
 chú ý **** là giống nhau
